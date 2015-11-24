@@ -1,0 +1,41 @@
+{
+  "name": "observable-connection-pool",
+  "version": "1.0.0",
+  "description": "Generic connection pool which can be used with Observerables or callbacks",
+  "main": "dist/connection-pool.js",
+  "scripts": {
+    "build": "npm run babel",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babel": "babel src --out-dir dist",
+    "babel:watch": "chsum1=\"\"; while : ; do chsum2=`find src/ -type f -exec md5sum {} \\;`; if [ \"$chsum1\" != \"$chsum2\" ]; then npm run babel; chsum1=$chsum2; fi; sleep 2; done",
+    "watch": "NODE_ENV=development nodemon --debug --watch dist/ --ext js --ignore tests/ --delay 500ms dist/test.js",
+    "debug": "npm run babel:watch & npm run watch & npm run node-inspector",
+    "node-inspector": "node-inspector --debug-port 5858 --web-host 0.0.0.0 --web-port 1337"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mangabi/observable-connection-pool.git"
+  },
+  "keywords": [
+    "connection pool"
+  ],
+  "author": "Adam Walz <adam@mangabi.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mangabi/observable-connection-pool/issues"
+  },
+  "homepage": "https://github.com/mangabi/observable-connection-pool#readme",
+  "dependencies": {
+    "lodash": "~3.10.1",
+    "mangabi-datastructures": "~1.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "~6.2.0",
+    "babel-preset-es2015": "~6.1.18"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
+}
