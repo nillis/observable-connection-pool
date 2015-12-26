@@ -74,12 +74,13 @@ function Pool(clientFactory) {
    * @param {Object} connection The acquired item to be destoyed.
    */
   function destroy(connection) {
-    totalConnections -= 1;
-    _lodash2.default.remove(availableConnections, function (connectionWithTimeout) {
-      return connectionWithTimeout === connection;
+    clientFactory.destroy(connection, function onDestroy() {
+      totalConnections -= 1;
+      _lodash2.default.remove(availableConnections, function (connectionWithTimeout) {
+        return connectionWithTimeout === connection;
+      });
+      ensureMinimum();
     });
-    clientFactory.destroy(connection);
-    ensureMinimum();
   }
 
   /**
