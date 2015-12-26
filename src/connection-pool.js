@@ -63,6 +63,7 @@ function Pool(clientFactory, opts = {}) {
       totalConnections -= 1
       _.remove(availableConnections, connectionWithTimeout => connectionWithTimeout === connection)
       ensureMinimum()
+      dispense()
     })  
   }
 

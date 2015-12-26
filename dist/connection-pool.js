@@ -82,6 +82,7 @@ function Pool(clientFactory) {
         return connectionWithTimeout === connection;
       });
       ensureMinimum();
+      dispense();
     });
   }
 
