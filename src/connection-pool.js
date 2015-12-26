@@ -59,10 +59,12 @@ function Pool(clientFactory, opts = {}) {
    * @param {Object} connection The acquired item to be destoyed.
    */
   function destroy(connection) {
-    totalConnections -= 1
-    _.remove(availableConnections, connectionWithTimeout => connectionWithTimeout === connection)
-    clientFactory.destroy(connection)
-    ensureMinimum()
+    clientFactory.destroy(connection, function onDestroy() {
+      totalConnections -= 1
+      _.remove(availableConnections, connectionWithTimeout => connectionWithTimeout === connection)
+      ensureMinimum()
+      dispense()
+    })  
   }
 
   /**
