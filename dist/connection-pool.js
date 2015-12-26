@@ -20,7 +20,9 @@ function Pool(clientFactory) {
     reapInterval: opts.reapInterval || 1000,
     refreshIdle: 'refreshIdle' in opts ? opts.refreshIdle : true,
     returnToHead: opts.returnToHead || false,
-    validate: opts.validate || function () {},
+    validate: opts.validate || function () {
+      return true;
+    },
     priorityRange: opts.priorityRange || 10,
     max: Math.max(isNaN(opts.max) ? 1 : Number(opts.max), 1),
     min: isNaN(opts.min) ? 0 : Number(opts.min)
