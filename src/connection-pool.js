@@ -296,7 +296,7 @@ function Pool(clientFactory, opts = {}) {
       } else if (typeof observer == 'function') {
         return observer(null, connection)
       } else {
-        release(connectconnection)
+        release(connection)
       }
     })
   }

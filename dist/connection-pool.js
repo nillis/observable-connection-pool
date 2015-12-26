@@ -291,17 +291,12 @@ function Pool(clientFactory) {
     clientFactory.create(function () {
       var err = undefined,
           connection = undefined;
-
-      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-
-      if (args.length > 1) {
-        err = args[0];
-        connection = args[1];
+      if (arguments.length > 1) {
+        err = arguments[0];
+        connection = arguments[1];
       } else {
-        err = args[0] instanceof Error ? args[0] : null;
-        connection = args[0] instanceof Error ? null : args[0];
+        err = arguments[0] instanceof Error ? arguments[0] : null;
+        connection = arguments[0] instanceof Error ? null : arguments[0];
       }
 
       var observer = undefined;
@@ -331,7 +326,7 @@ function Pool(clientFactory) {
       } else if (typeof observer == 'function') {
         return observer(null, connection);
       } else {
-        release(connectconnection);
+        release(connection);
       }
     });
   }
